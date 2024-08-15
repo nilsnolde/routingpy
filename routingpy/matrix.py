@@ -31,7 +31,7 @@ class Matrix(object):
         self._raw = raw
 
     @property
-    def durations(self) -> Optional[List[List[float]]]:
+    def durations(self) -> Optional[List[List[Optional[float]]]]:
         """
         The durations matrix as list akin to::
 
