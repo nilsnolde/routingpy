@@ -643,6 +643,8 @@ class Valhalla:
         if id:
             params["id"] = id
 
+        params.update(kwargs)
+
         return params
 
     @staticmethod
