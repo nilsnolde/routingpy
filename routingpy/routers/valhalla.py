@@ -201,8 +201,7 @@ class Valhalla:
         )
 
         return self.parse_direction_json(
-            self.client._request("/route", post_params=params, dry_run=dry_run),
-            units,
+            self.client._request("/route", post_params=params, dry_run=dry_run)
         )
 
     @staticmethod
@@ -265,7 +264,7 @@ class Valhalla:
         return params
 
     @staticmethod
-    def parse_direction_json(response, units):
+    def parse_direction_json(response):
         if response is None:  # pragma: no cover
             return Direction()
 
@@ -274,8 +273,7 @@ class Valhalla:
             geometry.extend(utils.decode_polyline6(leg["shape"]))
             duration += leg["summary"]["time"]
 
-            factor = 0.621371 if units == "mi" else 1
-            distance += int(leg["summary"]["length"] * 1000 * factor)
+            distance += leg["summary"]["length"]
 
         return Direction(geometry=geometry, duration=int(duration), distance=int(distance), raw=response)
 
@@ -577,7 +575,6 @@ class Valhalla:
 
         return self.parse_matrix_json(
             self.client._request("/sources_to_targets", post_params=params, dry_run=dry_run),
-            units,
         )
 
     @staticmethod
@@ -646,17 +643,16 @@ class Valhalla:
         return params
 
     @staticmethod
-    def parse_matrix_json(response, units):
+    def parse_matrix_json(response):
         if response is None:  # pragma: no cover
             return Matrix()
 
-        factor = 0.621371 if units == "mi" else 1
         durations = [
             [destination["time"] for destination in origin] for origin in response["sources_to_targets"]
         ]
         distances = [
             [
-                int(destination["distance"] * 1000 * factor)
+                destination["distance"]
                 if destination["distance"] is not None
                 else None
                 for destination in origin
