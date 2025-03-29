@@ -1,3 +1,5 @@
+In case anyone has interest to take over this repository, please write me on my public email. To be eligible you should have a proven track record of FOSS python projects and ideally some PyPI package management experience.
+
 routingpy
 ==========
 
