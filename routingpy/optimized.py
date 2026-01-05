@@ -102,6 +102,7 @@ class OptimizedDirection(object):
         """
         The original (input) location index for the ``reordered_index`` element of the response locations.
 
+        :param: The index of the optimized location.
         :rtype: int
         """
         return self._original_indices[reordered_index]

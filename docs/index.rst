@@ -121,6 +121,9 @@ Data
 .. autoclass:: routingpy.direction.Direction
     :members: geometry, duration, distance, km, mi
 
+.. autoclass:: routingpy.optimized.OptimizedDirection
+    :members: geometry, duration, distance, km, mi, original_index
+
 .. autoclass:: routingpy.isochrone.Isochrones
     :members: raw
 
